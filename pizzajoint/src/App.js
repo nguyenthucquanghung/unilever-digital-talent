@@ -6,6 +6,7 @@ import Base from './components/Base';
 import Toppings from './components/Toppings';
 import Order from './components/Order';
 import Modal from './components/Modal';
+import TalentChoosing from './components/TalentChoosing';
 import { AnimatePresence } from 'framer-motion';
 
 function App() {
@@ -41,6 +42,9 @@ function App() {
 					<Modal showModal={showModal} />
 					<AnimatePresence exitBeforeEnter onExitComplete={() => setShowModal(false)}>
 						<Switch location={location} key={location.key}>
+							<Route path="/choosing">
+								<TalentChoosing />
+							</Route>
 							<Route path="/base">
 								<Base addBase={addBase} pizza={pizza} />
 							</Route>
