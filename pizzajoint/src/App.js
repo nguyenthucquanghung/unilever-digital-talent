@@ -9,46 +9,56 @@ import Modal from './components/Modal';
 import { AnimatePresence } from 'framer-motion';
 
 function App() {
-  const location = useLocation();
-  const [pizza, setPizza] = useState({ base: "", toppings: [] });
-  const [showModal, setShowModal] = useState(false);
+	const location = useLocation();
+	const [pizza, setPizza] = useState({ base: "", toppings: [] });
+	const [showModal, setShowModal] = useState(false);
 
-  const addBase = (base) => {
-    setPizza({ ...pizza, base })
-  }
-  
-  const addTopping = (topping) => {
-    let newToppings;
-    if(!pizza.toppings.includes(topping)){
-      newToppings = [...pizza.toppings, topping];
-    } else {
-      newToppings = pizza.toppings.filter(item => item !== topping);
-    }
-    setPizza({ ...pizza, toppings: newToppings });
-  }
+	const addBase = (base) => {
+		setPizza({ ...pizza, base })
+	}
 
-  return (
-    <>
-      <Header />
-      <Modal showModal={showModal} />
-      <AnimatePresence exitBeforeEnter onExitComplete={() => setShowModal(false)}>
-        <Switch location={location} key={location.key}>
-          <Route path="/base">
-            <Base addBase={addBase} pizza={pizza} />
-          </Route>
-          <Route path="/toppings">
-            <Toppings addTopping={addTopping} pizza={pizza} />
-          </Route>
-          <Route path="/order">
-            <Order pizza={pizza} setShowModal={setShowModal} />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
-      </AnimatePresence>
-    </>
-  );
+	const addTopping = (topping) => {
+		let newToppings;
+		if (!pizza.toppings.includes(topping)) {
+			newToppings = [...pizza.toppings, topping];
+		} else {
+			newToppings = pizza.toppings.filter(item => item !== topping);
+		}
+		setPizza({ ...pizza, toppings: newToppings });
+	}
+	let backgroundUrl = "/background.jpg"
+	return (
+		<>
+			<div
+				className={`body-container`}
+				style={{
+					backgroundImage: `url(${backgroundUrl})`
+				}}
+			/>
+			<div className={`mask`}>
+				<div className={`body-content`} >
+					<Header />
+					<Modal showModal={showModal} />
+					<AnimatePresence exitBeforeEnter onExitComplete={() => setShowModal(false)}>
+						<Switch location={location} key={location.key}>
+							<Route path="/base">
+								<Base addBase={addBase} pizza={pizza} />
+							</Route>
+							<Route path="/toppings">
+								<Toppings addTopping={addTopping} pizza={pizza} />
+							</Route>
+							<Route path="/order">
+								<Order pizza={pizza} setShowModal={setShowModal} />
+							</Route>
+							<Route path="/">
+								<Home />
+							</Route>
+						</Switch>
+					</AnimatePresence>
+				</div>
+			</div>
+		</>
+	);
 }
 
 export default App;

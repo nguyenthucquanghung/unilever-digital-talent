@@ -3,17 +3,18 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 const containerVariants = {
-  hidden: { 
-    opacity: 0, 
-    x: '100vw' 
+  hidden: {
+    opacity: 0,
+    x: '200px'
   },
-  visible: { 
-    opacity: 1, 
+  visible: {
+    opacity: 1,
     x: 0,
-    transition: { type: 'spring', delay: 0.5 }
+    transition: { type: 'spring', delay: 0.5, mass: 1.5, stiffness: 200 }
   },
   exit: {
-    x: "-100vh",
+    opacity: 0,
+    x: -200,
     transition: { ease: 'easeInOut' }
   }
 };
@@ -49,7 +50,7 @@ const Toppings = ({ addTopping, pizza }) => {
               whileHover={{ scale: 1.3, originX: 0, color: '#F43C4E' }}
               transition={{ type: 'spring', stiffness: 300 }}
             >
-              <span className={spanClass}>{ topping }</span>
+              <span className={spanClass}>{topping}</span>
             </motion.li>
           )
         })}
