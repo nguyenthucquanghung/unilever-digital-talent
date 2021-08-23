@@ -3,6 +3,8 @@ import Loader from './Loader';
 import { modal, backdrop } from './Modal';
 import { buttonVariants, containerVariants } from './Home'
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
+
 export const hardSkills = [
     {
         idx: 1,
@@ -173,20 +175,33 @@ const tableRowVariants = {
         background: 'white',
     },
     hover: {
-        scale: 1.01,
-        background: '#0134cd',
-        color: 'white',
+        scale: 1.02,
+        // background: '#0134cd',
+        color: '#F43C4E',
         transition: {
-            duration: 0.3,
-            yoyo: Infinity
+            duration: 0.4,
+            // yoyo: Infinity
         }
     },
 }
+const getHardCount = (mask) => {
+    let res = 0;
+    for (let i = 0; i < hardSkills.length; ++i)
+        if ((1 << i) & mask)
+            ++res;
+    return res;
+}
+const getSoftCount = (mask) => {
+    let res = 0;
+    for (let i = hardSkills.length; i < softSkills.length + hardSkills.length; ++i)
+        if ((1 << i) & mask)
+            ++res;
+    return res;
+}
 const TalentChoosing = () => {
-    const [showHardSkills, setShowHardSkills] = useState(false);
+    const [showHardSkills, setShowHardSkills] = useState(true);
     const [showSoftSkills, setShowSoftSkills] = useState(false);
-    const [hardMask, setHardMask] = useState(0);
-    const [softMask, setSoftMask] = useState(0);
+    const [mask, setMask] = useState(0);
     return (
         <>
             <motion.div className="home container"
@@ -195,21 +210,31 @@ const TalentChoosing = () => {
                 animate="visible"
                 exit="exit"
             >
-                <h2>Choose any skills that you think you might have</h2>
+                <h2>Choose skills that you think you might have</h2>
                 <motion.button
                     variants={buttonVariants}
                     whileHover="hover"
                     onClick={() => setShowHardSkills(true)}
                 >
-                    Hard skills
+                    Show hard skills
                 </motion.button>
                 <motion.button
                     variants={buttonVariants}
                     whileHover="hover"
                     onClick={() => setShowSoftSkills(true)}
                 >
-                    Soft skills
+                    Show soft skills
                 </motion.button>
+                <p>You have chosen {getHardCount(mask)} hard skills and {getSoftCount(mask)} soft skills</p>
+                <Link to='/base'>
+                    <motion.button
+                        variants={buttonVariants}
+                        whileHover="hover"
+                    >
+                        Next
+                    </motion.button>
+                </Link>
+
                 <Loader />
             </motion.div>
             <AnimatePresence>
@@ -228,10 +253,11 @@ const TalentChoosing = () => {
                                 <table className={`skill-table`}>
                                     <tbody>
                                         {hardSkills.map((skill, idx) => {
-                                            // const trClassName = hardMask
+                                            const trClassName = ((1 << idx) & mask) ? 'selected' : ''
                                             return (
                                                 <motion.tr
-                                                    // className={ }
+                                                    onClick={() => setMask((1 << idx) ^ mask)}
+                                                    className={trClassName}
                                                     variants={tableRowVariants}
                                                     whileHover="hover"
                                                     visible="visible"
@@ -246,7 +272,7 @@ const TalentChoosing = () => {
                                 </table>
                             </div>
                             <div>
-                                <p>Thanks for your response!</p>
+                                <p>Selected: {getHardCount(mask)}/{hardSkills.length}</p>
                                 <button
                                     onClick={() => setShowHardSkills(false)}
                                 >Done</button>
@@ -265,10 +291,34 @@ const TalentChoosing = () => {
                             variants={modal}
                             exit="exit"
                         >
-                            <p>Thanks for your response!</p>
-                            <button
-                                onClick={() => setShowSoftSkills(false)}
-                            >Go to Unilerver education page</button>
+                            <div className="table-container">
+                                <table className={`skill-table`}>
+                                    <tbody>
+                                        {softSkills.map((skill, idx) => {
+                                            const trClassName = ((1 << (idx + hardSkills.length)) & mask) ? 'selected' : ''
+                                            return (
+                                                <motion.tr
+                                                    onClick={() => setMask((1 << (idx + hardSkills.length)) ^ mask)}
+                                                    className={trClassName}
+                                                    variants={tableRowVariants}
+                                                    whileHover="hover"
+                                                    visible="visible"
+                                                >
+                                                    <td className="index-col" >{skill.idx}</td>
+                                                    <td>{skill.sName}</td>
+                                                    <td>{skill.definition}</td>
+                                                </motion.tr>
+                                            )
+                                        })}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+                                <p>Selected: {getSoftCount(mask)}/{softSkills.length}</p>
+                                <button
+                                    onClick={() => setShowSoftSkills(false)}
+                                >Done</button>
+                            </div>
                         </motion.div>
                     </motion.div>
                 )}

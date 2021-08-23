@@ -273,16 +273,17 @@ li span.active::before {
 }
 .skill-table td {
     padding: 10px;
-    /* border: 1px solid lightgrey; */
+    /* border: 1px solid lightgr    ey; */
     text-align: start;
 }
 .skill-table tr {
     cursor: pointer;
 }
-.skill-table tr .selected {
+.skill-table tr.selected {
     border-radius: 10px;
-    background: #F43C4E;
-    color: white;
+    background: #0134cd !important;
+    color: white !important;
+    font-weight: 900;
 }
 .index-col {
     text-align: center !important;
