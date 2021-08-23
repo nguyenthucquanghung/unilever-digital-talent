@@ -221,18 +221,27 @@ li span.active::before {
 
 .skill-modal {
     width: 60%;
-    height: 60%;
+    height: max-content;
+    max-height: 80%;
     margin: 0 auto;
-    padding: 40px 20px;
+    padding: 20px 20px;
     background: white;
-    border-radius: 10px;
+    border-radius: 20px;
     /* text-align: center; */
     overflow: hidden;
+    display: block;
+}
+.skill-modal h3 {
+    font-weight: 600;
+    /* color: #F43C4E; */
+    color: #182CA6;
 }
 .skill-modal .table-container {
+    margin-top: 20px;
     overflow-y: scroll;
-    max-height: 90%;
-    padding: 0px 20px
+    height: 500px;
+    padding: 0 20px 0 20px;
+    margin-right: 20px;
 }
 .table-container::-webkit-scrollbar {
     width: 5px;
@@ -254,19 +263,62 @@ li span.active::before {
     color: #444;
     border-color: #444;
     font-weight: bold;
-    margin-top: 20px;
-    position: absolute;
-    right: 0;
-    margin-right: 40px;
+    margin-top: 0;
+    float: right;
+    margin-right: 20px;
 }
-
+.skill-modal .selections {
+    margin: 20px;
+    max-height: 115px;
+    overflow-y: auto;
+}
+@media screen {
+    
+}
+.skill-modal .selections::-webkit-scrollbar {
+    width: 5px;
+    background-color: #F5F5F5;
+}
+.skill-modal .selections::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgb(0 0 0 / 30%);
+    box-shadow: inset 0 0 6px rgb(0 0 0 / 30%);
+    background-color: lightgrey;
+}
+.skill-modal .selections::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgb(0 0 0 / 30%);
+    box-shadow: inset 0 0 6px rgb(0 0 0 / 30%);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
 .skill-modal p {
-    margin-top: 30px;
-    margin-left: 40px;
-    left: 0;
-    position: absolute;
+    margin-top: 10px;
+    margin-left: 20px;
+    /* position: absolute; */
     color: #444;
     font-weight: bold;
+    display: inline-block;
+}
+.skill-modal span {
+    color: #8E2D4E;
+    align-items: center;
+    display: inline-block;
+    margin-right: 5px;
+    margin-top: 5px;
+    padding: 3px 10px;
+    border-radius: 10px;
+    border: 2px solid lightgrey;
+}
+.remove-button {
+    cursor: pointer;
+    margin-bottom: 2px;
+    margin-left: 10px;
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+}
+.skill-modal .bottom-bar {
+    display: block;
 }
 .skill-table {
     border-collapse: collapse;

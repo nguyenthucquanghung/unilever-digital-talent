@@ -14,7 +14,7 @@ const backdrop = {
 const modal = {
 	hidden: { y: "-100vh", opacity: 0 },
 	visible: {
-		y: "150px",
+		y: "200px",
 		opacity: 1,
 		transition: { delay: 0.5 }
 	},
@@ -22,7 +22,7 @@ const modal = {
 		y: "-100vh",
 		opacity: 0,
 		transition: { ease: 'easeInOut' }
-	}
+	},
 }
 
 const Modal = ({ showModal }) => {

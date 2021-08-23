@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Loader from './Loader';
-import { modal, backdrop } from './Modal';
+import { backdrop } from './Modal';
 import { buttonVariants, containerVariants } from './Home'
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
@@ -44,87 +44,87 @@ export const hardSkills = [
     {
         idx: 8,
         sName: "Cloud computing",
-        definition: "A time-boxed, iterative approach to development that divides a product or program into short phases of work, which is then tested early and often throughout the development lifecycle"
+        definition: "The practice of using a network of remote servers hosted on the internet to store, manage, and process data rather than a local server or a personal computer"
     },
     {
         idx: 9,
         sName: "Community management",
-        definition: "A time-boxed, iterative approach to development that divides a product or program into short phases of work, which is then tested early and often throughout the development lifecycle"
+        definition: "The process of creating or altering an existing social media community through content, messaging, interaction, moderating, etc. in an effort to make the community stronger"
     },
     {
         idx: 10,
         sName: "Cybersecurity",
-        definition: "A time-boxed, iterative approach to development that divides a product or program into short phases of work, which is then tested early and often throughout the development lifecycle"
+        definition: "The protection of information systems from theft of/damage to the hardware, the software, or the information they contain"
     },
     {
         idx: 11,
         sName: "Data science",
-        definition: "A time-boxed, iterative approach to development that divides a product or program into short phases of work, which is then tested early and often throughout the development lifecycle"
+        definition: "Field which employs statistics and computation to derive meaningful algorithms and business insights from data"
     },
     {
         idx: 12,
         sName: "Digital manufacturing ",
-        definition: "A time-boxed, iterative approach to development that divides a product or program into short phases of work, which is then tested early and often throughout the development lifecycle"
+        definition: "The use of an integrated, computer-based system comprised of simulation, threedimensional (3D) visualization, analytics, and various collaboration tools to create product and manufacturing processes simultaneously"
     },
     {
         idx: 13,
         sName: "Search engine optimization (SEO)",
-        definition: "A time-boxed, iterative approach to development that divides a product or program into short phases of work, which is then tested early and often throughout the development lifecycle"
+        definition: "The process of maximizing the number of visitors to a website by ensuring that the site figures high on the list of results returned by a search engine"
     },
     {
         idx: 14,
         sName: "Innovation strategy",
-        definition: "A time-boxed, iterative approach to development that divides a product or program into short phases of work, which is then tested early and often throughout the development lifecycle"
+        definition: "Creating new products, services, and customer experiences in an effort to drive sustainable growth"
     },
     {
         idx: 15,
         sName: "Master data management",
-        definition: "A time-boxed, iterative approach to development that divides a product or program into short phases of work, which is then tested early and often throughout the development lifecycle"
+        definition: "Ensuring the uniformity, accuracy, stewardship, consistency, and accountability of the enterprise’s official shared master data assets"
     },
     {
         idx: 16,
         sName: "Mobile application design and development",
-        definition: "A time-boxed, iterative approach to development that divides a product or program into short phases of work, which is then tested early and often throughout the development lifecycle"
+        definition: "The ability to create experiences end-to-end (conceptualize, design, build, test, run) for any device"
     },
     {
         idx: 17,
         sName: "Robotics",
-        definition: "A time-boxed, iterative approach to development that divides a product or program into short phases of work, which is then tested early and often throughout the development lifecycle"
+        definition: "Technology dealing with the design and development of robots and the computer systems for their processing"
     },
     {
         idx: 18,
         sName: "Robotic process automation",
-        definition: "A time-boxed, iterative approach to development that divides a product or program into short phases of work, which is then tested early and often throughout the development lifecycle"
+        definition: "Automation in which a software robot is configured to manipulate existing application software in the same way a person works with those systems and the presentation layer to perform a specific task"
     },
     {
         idx: 19,
         sName: "Internet of things (IoT)",
-        definition: "A time-boxed, iterative approach to development that divides a product or program into short phases of work, which is then tested early and often throughout the development lifecycle"
+        definition: "A network of physical objects (e.g., devices, vehicles, buildings) embedded with electronics, software, sensors, and network connectivity that enables these objects to collect and exchange data"
     },
     {
         idx: 20,
         sName: "User experience design",
-        definition: "A time-boxed, iterative approach to development that divides a product or program into short phases of work, which is then tested early and often throughout the development lifecycle"
+        definition: "The process of development and improvement of quality interaction between a user and all facets of a company across research, testing, development, content, and prototyping"
     },
     {
         idx: 21,
         sName: "User interface design",
-        definition: "A time-boxed, iterative approach to development that divides a product or program into short phases of work, which is then tested early and often throughout the development lifecycle"
+        definition: "The practice of transferring a brand’s strengths and visual assets to a product’s interface to enhance the user’s experience and visually guide the user through an interface via interactive elements across platforms"
     },
     {
         idx: 22,
         sName: "Virtual reality",
-        definition: "A time-boxed, iterative approach to development that divides a product or program into short phases of work, which is then tested early and often throughout the development lifecycle"
+        definition: "A computer technology that replicates an environment, real or imagined, and simulates a user's physical presence and environment in a way that allows the user to interact with it, artificially creating a sensory experience"
     },
     {
         idx: 23,
         sName: "Video content marketing",
-        definition: "A time-boxed, iterative approach to development that divides a product or program into short phases of work, which is then tested early and often throughout the development lifecycle"
+        definition: "The marketing technique of creating and distributing valuable, relevant, and consistent video content to attract and acquire a clearly defined audience"
     },
     {
         idx: 24,
         sName: "Web development",
-        definition: "A time-boxed, iterative approach to development that divides a product or program into short phases of work, which is then tested early and often throughout the development lifecycle"
+        definition: "Coding or programming that enables website functionality as per the owner's requirements and mainly deals with the non-design aspect of building websites"
     },
 ]
 export const softSkills = [
@@ -198,9 +198,24 @@ const getSoftCount = (mask) => {
             ++res;
     return res;
 }
+const horizontalModal = {
+	hidden: { x: "200%", y: '120px', opacity: 0 },
+	visible: {
+		y: "120px",
+        x: 0,
+		opacity: 1,
+		transition: { delay: 0.3 }
+	},
+	exit: {
+		x: "-100%", y: '120px',
+		opacity: 0,
+		transition: { ease: 'easeInOut' }
+	},
+}
 const TalentChoosing = () => {
     const [showHardSkills, setShowHardSkills] = useState(true);
     const [showSoftSkills, setShowSoftSkills] = useState(false);
+    const [isInitial, setIsInitial] = useState(true);
     const [mask, setMask] = useState(0);
     return (
         <>
@@ -246,9 +261,10 @@ const TalentChoosing = () => {
                         exit="exit"
                     >
                         <motion.div className="skill-modal"
-                            variants={modal}
-                            exit="exit"
+                            variants={horizontalModal}
+                            exit={'exit'}
                         >
+                            <h3 style={{ marginLeft: '20px' }}>Below are list of hard skills. Please select hard skills that you think you might have!</h3>
                             <div className="table-container">
                                 <table className={`skill-table`}>
                                     <tbody>
@@ -271,11 +287,34 @@ const TalentChoosing = () => {
                                     </tbody>
                                 </table>
                             </div>
-                            <div>
+                            <div className="selections">
+                                {hardSkills.map((skill, idx) => {
+                                    return ((1 << idx) & mask) ? (
+                                        <span>
+                                            {skill.sName}
+                                            <img
+                                                src="/close.png"
+                                                className="remove-button"
+                                                onClick={() => {
+                                                    setMask((1 << idx) ^ mask);
+                                                }}
+                                            /></span>
+                                    ) : <></>
+
+                                })}
+                            </div>
+                            <div className="bottom-bar">
                                 <p>Selected: {getHardCount(mask)}/{hardSkills.length}</p>
                                 <button
-                                    onClick={() => setShowHardSkills(false)}
-                                >Done</button>
+                                    onClick={() => {
+                                        setShowHardSkills(false);
+                                        if (isInitial) {
+                                            setTimeout(() => {
+                                                setShowSoftSkills(true)
+                                            }, 300);
+                                        }
+                                    }}
+                                >{isInitial ? 'Next' : 'Done'}</button>
                             </div>
                         </motion.div>
                     </motion.div>
@@ -288,9 +327,10 @@ const TalentChoosing = () => {
                         exit="exit"
                     >
                         <motion.div className="skill-modal"
-                            variants={modal}
+                            variants={horizontalModal}
                             exit="exit"
                         >
+                            <h3 style={{ marginLeft: '20px' }}>Below are list of soft skills. Please select soft skills that you think you might have!</h3>
                             <div className="table-container">
                                 <table className={`skill-table`}>
                                     <tbody>
@@ -313,11 +353,40 @@ const TalentChoosing = () => {
                                     </tbody>
                                 </table>
                             </div>
-                            <div>
+                            <div className="selections">
+                                {softSkills.map((skill, idx) => {
+                                    return ((1 << (idx + hardSkills.length)) & mask) ? (
+                                        <span>
+                                            {skill.sName}
+                                            <img
+                                                src="/close.png"
+                                                className="remove-button"
+                                                onClick={() => {
+                                                    setMask((1 << (idx + hardSkills.length)) ^ mask);
+                                                }}
+                                            /></span>
+                                    ) : <></>
+
+                                })}
+                            </div>
+                            <div className="bottom-bar">
                                 <p>Selected: {getSoftCount(mask)}/{softSkills.length}</p>
                                 <button
-                                    onClick={() => setShowSoftSkills(false)}
+                                    onClick={() => {
+                                        setShowSoftSkills(false);
+                                        setIsInitial(false);
+                                    }}
                                 >Done</button>
+                                {isInitial && <button
+                                    onClick={() => {
+                                        setShowSoftSkills(false);
+                                        if (isInitial) {
+                                            setTimeout(() => {
+                                                setShowHardSkills(true);
+                                            }, 300);
+                                        }
+                                    }}
+                                >Back</button>}
                             </div>
                         </motion.div>
                     </motion.div>
